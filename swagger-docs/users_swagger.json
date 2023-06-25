@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "UserWiki",
+    "title": "UserWiki - Users API",
     "description": "Wiki API",
     "version": "1.0.0"
   },

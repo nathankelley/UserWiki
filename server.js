@@ -14,8 +14,6 @@ app.use((req, res, next) => {
 //connects to auth0
 // app.use(auth(authConfig.config));
 
-// //connect to routes folder
-// app.use('/', require('./routes'));
 
 //connect to routes folder
 app.use('/', require('./routes'));
