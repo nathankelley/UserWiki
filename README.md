@@ -20,7 +20,9 @@ The swagger.json and swagger.js files that used to exist in the project have bee
 api-docs with the following endpoints:
 
 /api-docs/users
+
 /api-docs/pokemon
+
 /api-docs/eldenring
 
 
