@@ -11,7 +11,9 @@ To update your respective swagger doc, go to the "swagger-docs" folder. There, y
 Each one is made so that we can go into it and update it should we need to. I would recommend that we each take the following doc:
 
 Will - pokemon_swagger.json
+
 Jose - users_swagger.json
+
 Nathan - eldenring_swagger.json
 
 The swagger.json and swagger.js files that used to exist in the project have been removed and the swagger.js file handles the routes to the corresponding 
