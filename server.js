@@ -26,9 +26,11 @@ db.mongoose
     useUnifiedTopology: true
   })
   .then(() => {
-    app.listen(port, () => {
-      console.log(`Connected to the database and server running on port ${port}.`);
+    // Listen on Port 3000
+    app.listen(3000, () => {
+      console.log('Server listening on port 3000');
     });
+
   })
   .catch(err => {
     console.log('Cannot connect to the database!', err);
