@@ -19,9 +19,9 @@ app.use((req, res, next) => {
 app.use('/', require('./routes'));
 
 // Login Route
-app.get('/pokemon', (req, res) => {
+app.get('/pokemon_index', (req, res) => {
   // Render the pokemon page here
-  res.sendFile('pokemon.html', { root: 'frontend/Pokemon/pokemon_index.html' });
+  res.sendFile('pokemon_index.html', { root: 'frontend/Pokemon/' });
 });
 
 //connect to db
