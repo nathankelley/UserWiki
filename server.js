@@ -18,6 +18,12 @@ app.use((req, res, next) => {
 //connect to routes folder
 app.use('/', require('./routes'));
 
+// Login Route
+app.get('/pokemon', (req, res) => {
+  // Render the pokemon page here
+  res.sendFile('pokemon.html', { root: 'frontend/Pokemon/pokemon_index.html' });
+});
+
 //connect to db
 const db = require('./models');
 db.mongoose
