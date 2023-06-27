@@ -1,9 +1,11 @@
 const routes = require('express').Router();
 const users = require('./users');
 const pokemon = require('./pokemon');
+const eldenring = require('./eldenring');
 routes.use('/', require('./swagger'));
 routes.use('/', users);
 routes.use('/', pokemon);
+routes.use('/', eldenring);
 // routes.use('/', inventory);
 // routes.use('/', (req, res, next) => {
 //   if (req.oidc.isAuthenticated()) {
