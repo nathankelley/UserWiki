@@ -1,0 +1,178 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Pokemon API",
+    "description": "API for managing Pokemon",
+    "version": "1.0.0"
+  },
+  "host": "%HOST%",
+  "basePath": "/",
+  "schemes": ["https"],
+  "paths": {
+    "/pokemon": {
+      "get": {
+        "description": "Get all Pokemon",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Pokemon"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/pokemon/{id}": {
+      "get": {
+        "description": "Get a specific Pokemon by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Pokemon"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/add-pokemon": {
+      "post": {
+        "description": "Create a new Pokemon",
+        "parameters": [
+          {
+            "name": "pokemon",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pokemon"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Pokemon"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/update-pokemon/{id}": {
+      "put": {
+        "description": "Update a Pokemon by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pokemon",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pokemon"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/remove-pokemon/{id}": {
+      "delete": {
+        "description": "Delete a Pokemon by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Pokemon": {
+      "type": "object",
+      "properties": {
+        "pokeName": {
+          "type": "string"
+        },
+        "pokeSpecie": {
+          "type": "string"
+        },
+        "pokeTypeOne": {
+          "type": "string"
+        },
+        "pokeTypeTwo": {
+          "type": "string"
+        },
+        "pokeDescription": {
+          "type": "string"
+        },
+        "pokeAbilityOne": {
+          "type": "string"
+        },
+        "pokeAbilityTwo": {
+          "type": "string"
+        },
+        "pokeDexNum": {
+          "type": "number"
+        },
+        "pokeImage": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

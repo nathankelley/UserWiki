@@ -1,0 +1,17 @@
+{
+  "swagger": "2.0",
+  "basePath": "/eldenring",
+  "paths": {
+    "/": {
+      "get": {
+        "description": "Get Elden Ring information",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}
