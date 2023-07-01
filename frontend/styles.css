@@ -1,6 +1,6 @@
 /* This is the main stuff needed to use Tailwind.css. This file is then made an output into the frontend folder */
 /* To make sure that we are always compiling and outputting the css, use the following command in the terminal: */
-/* npx tailwindcss -i input.css -o frontend/output.css --watch */
+/* npx tailwindcss-cli@latest build -w -o styles_output.css */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
