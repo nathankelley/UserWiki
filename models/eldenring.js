@@ -2,31 +2,30 @@ const { string, array } = require("joi")
 
 module.exports = (mongoose) => {
     const eldenSchema = mongoose.Schema({
-        bosses: {   
-            boss_name: {
-                type: string
-            },
-            hp: {
-                type: string
-            },
-            defense: {
-                type: string
-            },
-            stance: {
-                type: string
-            },
-            parryable: {
-                type: string
-            },
-            required: {
-                type: string
-            },
-            weaknesses: {
-                type: array
-            },
-            strengths: {
-                type: array
-            }
+        boss_name: {
+            type: String
+        },
+        hp: {
+            type: String
+        },
+        defense: {
+            type: String
+        },
+        stance: {
+            type: String
+        },
+        parryable: {
+            type: String
+        },
+        required: {
+            type: String
+        },
+        weaknesses: {
+            type: Array
+        },
+        strengths: {
+            type: Array
         }
-    })
-}
+    });
+    return mongoose.model('eldenring', eldenSchema, 'eldenring');
+};

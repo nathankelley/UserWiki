@@ -1,12 +1,12 @@
+const mongoose = require('mongoose');
 const db = require('../models');
-const elden = db.eldenring;
-//const { authSchema } = require('../helpers/validation');
+const Boss = db.eldenring;
 
 
 // GET all undead
 module.exports.getAll = (req, res) => {
   try {
-    elden.find({})
+    Boss.find({})
       .then((data) => {
         res.status(200).send(data);
       })
@@ -22,21 +22,22 @@ module.exports.getAll = (req, res) => {
 
 
 // GET single contact
-module.exports.getBoss = (req, res) => {
+module.exports.getBoss = async (req, res) => {
   try {
-    const boss_id = req.params._id;
-    elden.find({ _id: boss_id })
-      .then((data) => {
-        res.status(200).send(data);
-      })
-      .catch((err) => {
+    const _id = req.params._id;
+    const boss = await Boss.findById({_id});
+
+    if (!boss) {
+      res.status(404).send({ message: 'Elden Ring boss not found' });
+      return;
+    }
+    
+    res.status(200).send(data);
+    } catch(err) {
         res.status(500).send({
           message: err.message || 'Some error occurred while retrieving the Elden Ring boss.'
-        });
       });
-  } catch (err) {
-    res.status(500).json(err);
-  }
+    };
 };
 
   
@@ -70,12 +71,12 @@ module.exports.getBoss = (req, res) => {
   // UPDATE a contact in the db
   module.exports.updateBoss = async (req, res) => {
     try {
-      const boss_id = req.params._id;
-      if (!boss_id) {
+      const _id = req.params._id;
+      if (!_id) {
         res.status(400).send({ message: 'Invalid ID Supplied' });
         return;
       }
-      elden.replaceOne({ _id: boss_id }, {
+      Boss.replaceOne({ _id: _id }, {
         bossName: req.params.bossName,
         hp: req.body.hp,
         defense: req.body.defense,
@@ -101,12 +102,12 @@ module.exports.getBoss = (req, res) => {
   // DELETE a contact from the db
   module.exports.deleteBoss = async (req, res) => {
     try {
-      const boss_id = req.params._id;
+      const _id = req.params._id;
       if (!boss_id) {
         res.status(400).send({ message: 'Invalid ID Supplied' });
         return;
       }
-      elden.deleteOne({ _id: boss_id }).then(() => {
+      Boss.deleteOne({ _id: _id }).then(() => {
         res.status(204).send();
       }
       ).catch((err) => {

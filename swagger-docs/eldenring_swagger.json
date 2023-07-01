@@ -1,16 +1,155 @@
 {
   "swagger": "2.0",
-  "basePath": "/eldenring",
+  "info": {
+    "title": "Elden Ring Boss API",
+    "description": "Documentation regarding Elden Ring Bosses, their stats, drops, and characteristics.",
+    "version": "1.0.0"
+  },
+  "host": "%HOST",
+  "basePath": "/",
+  "schemes": ["http"],
   "paths": {
-    "/": {
+    "/eldenring": {
       "get": {
-        "description": "Get Elden Ring information",
+        "tags": ["Elden Ring Bosses"],
+        "description": "Get Elden Ring Boss information",
+        "produces": ["application/json"],
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "OK"
+          "200": { "description": "OK" }
+        }
+      },
+      "post": {
+        "tags": ["Elden Ring Boss"],
+        "description": "Submit an Elden Ring Boss",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "boss_name": { "example": "Morgott, The Omen King" },
+                "hp": { "example": "10399" },
+                "defense": { "example": "114" },
+                "stance": { "example": "80" },
+                "parryable": { "example": "true" },
+                "required": { "example": "true" },
+                "weaknesses": { "example": ["Slash", "Lightning"] },
+                "strengths": { "example": ["Holy", "Sleep"] },
+                "image": { "example": "https://eldenring.wiki.fextralife.com/file/Elden-Ring/morgott_the_omen_king_bosses_elden_ring_wiki_600px.jpg" 
+              }
+              }
+            }
+          }
+        ],
+      "security": [
+        {
+          
+        }
+      ],
+      "responses": {
+        "201": { "description": "Elden Ring Boss submitted successfully!" },
+        "500": { "description": "Internal Server Error" }
+        }
+      }
+    },
+      "/eldenring/{id}": {
+        "get": {
+          "tags": ["Elden Ring Boss"],
+          "description": "Get specific information about an Elden Ring Boss, use the ID to search.",
+          "produces": [ "application/json" ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": { "description": "OK" }
+          }
+      },
+      "put": {
+        "tags": ["Elden Ring Boss"],
+        "description": "Update an existing Elden Ring Boss by it's ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "boss_name": { "example": "Morgott, The Omen King" },
+                "hp": { "example": "10399" },
+                "defense": { "example": "114" },
+                "stance": { "example": "80" },
+                "parryable": { "example": "true" },
+                "required": { "example": "true" },
+                "weaknesses": { "example": ["Slash", "Lightning"] },
+                "strengths": { "example": ["Holy", "Sleep"] },
+                "image": { "example": "https://eldenring.wiki.fextralife.com/file/Elden-Ring/morgott_the_omen_king_bosses_elden_ring_wiki_600px.jpg" }
+              }
+            }
+          }
+        ],
+        "security": [
+          {
+
+          }
+        ],
+        "responses": {
+          "204": { "description": "Elden Ring Boss updated successfully." },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
+      "delete": {
+        "tags": ["Elden Ring Boss"],
+        "description": "Delete an existing Elden Ring Boss",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Elden Ring Boss deleted successfully. Boo."
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
+      }
+    }
+  },
+  "definitions": {
+    "Elden Ring Bosses": {
+      "type": "object",
+      "properties": {
+        "boss_name": { "type": "String" },
+        "hp": { "type": "String" },
+        "defense": { "type": "String" },
+        "stance": { "type": "String" },
+        "parryable": { "type": "String" },
+        "required": { "type": "String" },
+        "weaknesses": { "type": "Array" },
+        "strengths": { "type": "Array" },
+        "image": { "type": "String" }
       }
     }
   }
