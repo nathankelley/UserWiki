@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const eldenController = require('../controllers/eldenController');
+const eldenController = require('../controllers/eldenController.js');
 
-router.get('/', eldenController.getAll);
-router.get('/:_id', eldenController.getBoss);
-router.post('/', eldenController.create);
-router.put('/:_id', eldenController.updateBoss);
-router.delete('/:_id', eldenController.deleteBoss);
+router.get('/eldenring/', eldenController.getAll);
+router.post('/eldenring/', eldenController.create);
+router.get('/eldenring/:_id', eldenController.getBoss);
+router.put('/eldenring/:_id', eldenController.updateBoss);
+router.delete('/eldenring/:_id', eldenController.deleteBoss);
 
 module.exports = router;
