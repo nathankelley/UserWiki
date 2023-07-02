@@ -20,10 +20,13 @@ fetch('/eldenring')
       <img src="${boss.image}" alt="${boss.boss_name}" class="w-36 h-auto mb-4 md:mb-0 md:mr-4">
       <div class="flex flex-col items-center md:items-start">
         <h2 class="text-xl font-bold text-gray-800">${boss.boss_name}</h2>
-        <h3 class="text-lg font-bold text-gray-800 mb-2 md:mb-4">Specie: ${boss.hp}</h3>
-        <h3 class="text-md italic font-bold text-gray-600 mb-2 md:mb-4">Type: ${boss.defense}, ${boss.stance}</h3>
-        <h3 class="text-md md:text-sm italic font-bold text-gray-600 mb-2 md:mb-4">Abilities: ${boss.parryable}, ${boss.required}</h3>
-        <h3 class="text-md md:text-sm italic font-bold text-gray-600">${boss.weaknesses}</h3>
+        <h3 class="text-md md:text-sm font-bold text-gray-600">HP: ${boss.hp}</h3>
+        <h3 class="text-md md:text-sm italic font-bold text-gray-600 ">Defense: ${boss.defense}</h3>
+        <h3 class="text-md md:text-sm italic font-bold text-gray-600 ">Stance: ${boss.stance}</h3>
+        <h3 class="text-md md:text-sm italic font-bold text-gray-600 ">Parryable: ${boss.parryable}</h3>
+        <h3 class="text-md md:text-sm italic font-bold text-gray-600">Required: ${boss.required}</h3>
+        <h3 class="text-md md:text-sm italic font-bold text-gray-600">Weaknesses: <br>${boss.weaknesses}</h3>
+        <h3 class="text-md md:text-sm italic font-bold text-gray-600">Strengths: <br>${boss.strengths}</h3>
       </div>
     </div>
   
