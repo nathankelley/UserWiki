@@ -3,7 +3,6 @@ const db = require('../models');
 const Boss = db.eldenring;
 
 
-// GET all undead
 module.exports.getAll = (req, res) => {
   try {
     Boss.find({})
@@ -21,31 +20,28 @@ module.exports.getAll = (req, res) => {
 };
 
 
-// GET single contact
-module.exports.getBoss = async (req, res) => {
+module.exports.getBoss = (req, res) => {
   try {
-    const _id = req.params._id;
-    const boss = await Boss.findById({_id});
-
-    if (!boss) {
-      res.status(404).send({ message: 'Elden Ring boss not found' });
-      return;
-    }
-    
-    res.status(200).send(data);
-    } catch(err) {
+    const boss_id = req.params._id;
+    Boss.find({ _id: boss_id })
+      .then((data) => {
+        res.status(200).send(data);
+      })
+      .catch((err) => {
         res.status(500).send({
           message: err.message || 'Some error occurred while retrieving the Elden Ring boss.'
-      });
-    };
+        });
+      });   
+  } catch(err) {
+      res.status(500).json(err);
+  };
 };
 
   
   
-  // POST (write) a contact to the db
   module.exports.create = (req, res) => {
     try {
-      if (!req.body.bossName || !req.body.hp || !req.body.defense || !req.body.stance || !req.body.parryable || !req.body.required || !req.body.weaknesses || !req.body.strengths) {
+      if (!req.body.boss_name || !req.body.hp || !req.body.defense || !req.body.stance || !req.body.parryable || !req.body.required || !req.body.weaknesses || !req.body.strengths) {
         res.status(400).send({ message: 'Content can not be empty!' });
         return;
       }
@@ -68,7 +64,6 @@ module.exports.getBoss = async (req, res) => {
   };
   
   
-  // UPDATE a contact in the db
   module.exports.updateBoss = async (req, res) => {
     try {
       const _id = req.params._id;
@@ -99,7 +94,6 @@ module.exports.getBoss = async (req, res) => {
   };
   
   
-  // DELETE a contact from the db
   module.exports.deleteBoss = async (req, res) => {
     try {
       const _id = req.params._id;

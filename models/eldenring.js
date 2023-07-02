@@ -25,6 +25,9 @@ module.exports = (mongoose) => {
         },
         strengths: {
             type: Array
+        },
+        image: {
+            type: String
         }
     });
     return mongoose.model('eldenring', eldenSchema, 'eldenring');
