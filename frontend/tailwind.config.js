@@ -1,6 +1,5 @@
-
 module.exports = {
-  content: ["./index.html","./pokemon_index.html","./eldenring_index.html","./src/**/*.{html,js}"],
+  content: ["./pokemon_index.html", "./pokemon_script.js", "./eldenring_index.html", "./src/**/*.{html,js}"],
   theme: {
     extend: {},
   },

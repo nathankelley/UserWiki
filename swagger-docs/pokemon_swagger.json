@@ -7,7 +7,7 @@
   },
   "host": "%HOST%",
   "basePath": "/",
-  "schemes": ["https"],
+  "schemes": ["http"],
   "paths": {
     "/pokemon": {
       "get": {
@@ -146,31 +146,31 @@
       "type": "object",
       "properties": {
         "pokeName": {
-          "type": "string"
+          "type": "Urshifu"
         },
         "pokeSpecie": {
-          "type": "string"
+          "type": "Wushu Pokemon"
         },
         "pokeTypeOne": {
-          "type": "string"
+          "type": "Fighting"
         },
         "pokeTypeTwo": {
-          "type": "string"
+          "type": "Dark/Water"
         },
         "pokeDescription": {
           "type": "string"
         },
         "pokeAbilityOne": {
-          "type": "string"
+          "type": "Unseen Fist"
         },
         "pokeAbilityTwo": {
-          "type": "string"
+          "type": "Urshifu tends to be a believer in either the One-Hit KO single-strike style, or the Multi-Strike rapid-strike style"
         },
         "pokeDexNum": {
-          "type": "number"
+          "type": "892"
         },
         "pokeImage": {
-          "type": "string"
+          "type": "https://img.pokemondb.net/artwork/large/urshifu-single-strike.jpg"
         }
       }
     }
