@@ -1,7 +1,15 @@
 module.exports = {
-  content: ["./pokemon_index.html", "./pokemon_script.js", "./eldenring_index.html", "./src/**/*.{html,js}"],
+  content: ["./pokemon_index.html", "./pokemon_script.js", "./eldenring_index.html", "./index.html", "./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'Jasper': '#CD533B',
+        'Khaki': '#C7AC92',
+        'Silver': '#C0BABC',
+        'Tea-green': '#C2EABD',
+        'Tea-yellow-green': '#DCF2B0'
+      },
+    },
   },
   plugins: [],
 }
