@@ -29,8 +29,6 @@ fetch('/eldenring')
         <h3 class="text-md md:text-sm italic font-bold text-gray-600">Strengths: <br>${boss.strengths}</h3>
       </div>
     </div>
-  
-
     `;    
 
     eldenContainer.appendChild(bossCard);
