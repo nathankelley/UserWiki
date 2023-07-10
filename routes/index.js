@@ -2,10 +2,13 @@ const routes = require('express').Router();
 const users = require('./users');
 const pokemon = require('./pokemon');
 const eldenring = require('./eldenring');
+const path = require('path');
 routes.use('/', require('./swagger'));
+
 routes.use('/', users);
 routes.use('/', pokemon);
 routes.use('/', eldenring);
+
 // routes.use('/', inventory);
 // routes.use('/', (req, res, next) => {
 //   if (req.oidc.isAuthenticated()) {
@@ -24,5 +27,19 @@ routes.use('/', eldenring);
 //     res.send(docData);
 //   }
 // });
+
+// ...
+
+
+routes.use('/', (req, res, next) => {
+    if(!req.oidc.isAuthenticated()){
+        res.sendFile(path.join(__dirname, '../frontend/index.html'));
+
+    } else {
+        res.sendFile(path.join(__dirname, '../frontend/login.html'));
+        
+    }
+});
+
 
 module.exports = routes;

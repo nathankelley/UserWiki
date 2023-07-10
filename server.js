@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const {auth} = require('express-openid-connect');
-// const authConfig = require('./config/auth0.config.js');
+const {auth} = require('express-openid-connect');
+const authConfig = require('./config/auth0.config.js');
 const port = process.env.PORT || 3000;
 
 const app = express();
@@ -16,7 +16,7 @@ app.use((req, res, next) => {
   next();
 });
 // Connect to auth0
-// app.use(auth(authConfig.config));
+app.use(auth(authConfig.config));
 
 // Connect to routes folder
 app.use('/', require('./routes'));
