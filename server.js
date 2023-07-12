@@ -1,8 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const {auth} = require('express-openid-connect');
-const authConfig = require('./config/auth0.config.js');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const port = process.env.PORT || 3000;
+const googleOAuthConfig = require('./config/googleOauth.config.js');
+
 
 const app = express();
 // Serve static files from the frontend folder
@@ -15,8 +17,28 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   next();
 });
-// Connect to auth0
-app.use(auth(authConfig.config));
+
+// Connect to Google OAuth
+const passport = require('passport');
+
+passport.use(new GoogleStrategy(
+  googleOAuthConfig.config, 
+  (accessToken, refreshToken, profile, done) => {
+  // Implement your logic to handle the authenticated user profile
+  // This callback will be triggered after successful Google OAuth authentication
+}));
+
+
+// Authentication route
+// app.get('/api/sessions/oauth/google', authConfig.authenticate('google', { scope: ['profile', 'email'] }));
+
+// // Callback route
+// app.get('/auth/google/callback', authConfig.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
+//   // Handle successful authentication
+//   res.redirect('/dashboard');
+// });
+
+
 
 // Connect to routes folder
 app.use('/', require('./routes'));
@@ -28,6 +50,9 @@ app.use('/', require('./routes'));
 //   // Render the pokemon page here
 //   res.sendFile('pokemon_index.html', { root: 'frontend' });
 // });
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Connect to the database and start the server
 const db = require('./models');

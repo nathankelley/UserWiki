@@ -29,15 +29,16 @@ routes.use('/', eldenring);
 // });
 
 // ...
+routes.use('/login', (req, res, next) => {
+    
+    res.sendFile(path.join(__dirname, '../frontend/login.html'));
 
 
+});
 routes.use('/', (req, res, next) => {
-    if(req.oidc.isAuthenticated()){
-        res.sendFile(path.join(__dirname, '../frontend/index.html'));
-    } else {
-        res.sendFile(path.join(__dirname, '../frontend/login.html'));
+    
+    res.sendFile(path.join(__dirname, '../frontend/index.html'));
 
-    }
 
 });
 
