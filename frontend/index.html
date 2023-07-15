@@ -12,31 +12,38 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles_output.css">
     </head>
-    <body class="bg-gradient-to-r from-black from-25% via-zinc-900 from-65% to-Jasper">
+    <body class="bg-gray-100">
+      <!-- This gradient was a bit harsh. Commented it out and went with a slight gray bg so stay consistent with other pages. -->
+      <!-- class="bg-gradient-to-r from-black from-25% via-zinc-900 from-65% to-Jasper" -->
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-      <header class="py-4 px-6 shadow">
-        <div class="mx-auto flex flex-row items-center justify-between">
-          <h1 class="p-6 text-5xl font-bold text-gray-800 stroke-cyan-500">User Wiki</h1>
-          <button id="loginButton" class="px-4 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-lg">Log In</button>
+      <header class="bg-white py-4 px-6 shadow">
+        <div class=" mx-auto flex flex-row items-center justify-between">
+            <h1 class="text-2xl font-bold text-gray-800">User Wiki's</h1>
+            <!-- updated this login button to stay consistent with other pages. It also now directs to the login form -->
+            <a href="./login.html" class="text-center bg-gray-300 font-bold text-md text-gray-600 hover:text-gray-800 
+            hover:scale-110 hover:text-white p-2 hover:bg-blue-500 rounded-[24px] w-[132px] transition ease-in-out duration-200
+            ">Login</a>
        </div>
       </header> 
 
       <hr>
 
-      <div id="loginWindowContainer"></div>
+      <!-- Commented this out so that we can work on using the login page! - Will M -->
+      <!-- <div id="loginWindowContainer"></div> -->
 
       <main class="p-12 flex-col"> 
-        <div class="flex flex-col w-1/2 gap-2 mt-6" id="link-container"> 
-          <div class="transition ease-in-out p-8 md:p-4 flex flex-col items-center md:flex-row hover:translate-x-6 hover:scale-125 duration-300">
+        <h1 class="font-bold text-4xl text-gray-800">Current Wiki's</h1>
+        <div class="flex flex-col w-1/2 gap-y-12 mt-6" id="link-container"> 
+          <div class="w-[32rem] h-[16rem] bg-gray-800 hover:bg-gray-600 rounded-2xl transition ease-in-out p-8 md:p-4 flex flex-col shadow-xl justify-center items-center md:flex-row hover:scale-110 duration-300">
             <a href="./eldenring_index.html"> 
-              <img src="./images/eldenring.jpg" alt="Elden Ring Logo" class="mb-4 md:mb-0 md:mr-4"/>
+              <img src="./images/eldenring.png" alt="Elden Ring Logo" class="w-auto h-56 object-contain mb-4 md:mb-0 md:mr-4"/>
             </a>
           </div>
-          <div class="transition ease-in-out p-8 md:p-4 flex flex-col items-center md:flex-row shadow-2xl hover:scale-110 duration-300">
+          <div class="w-[32rem] h-[16rem] bg-gray-800 hover:bg-gray-600 rounded-2xl transition ease-in-out p-8 md:p-4 flex flex-col justify-center items-center md:flex-row shadow-xl hover:scale-110 duration-300">
             <a href="./pokemon_index.html"> 
-              <img src="./images/pokemon-logo-png-1421.png" alt="Pokemon Logo" class="mb-4 md:mb-0 md:mr-4"/> 
+              <img src="./images/pokemon.png" alt="Pokemon Logo" class="w-auto h-56 object-contain mb-4 md:mb-0 md:mr-4"/> 
             </a>
           </div>
         </div>

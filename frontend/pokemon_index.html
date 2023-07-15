@@ -8,18 +8,31 @@
   <link href="styles_output.css" rel="stylesheet">
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 overflow-y-auto scrollbar-hide">
 
   <!-- Header -->
   <header class="bg-white py-4 px-6 shadow">
     <div class=" mx-auto flex flex-row items-center justify-between">
       <h1 class="text-2xl font-bold text-gray-800">User Wiki - Pokemon</h1>
-      <!-- <a href="/logout" class="text-center font-bold text-md text-gray-600 hover:text-gray-800 hover:scale-110 hover:text-white p-2 hover:bg-red-500 rounded-[24px] w-[132px]">Logout</a> -->
+      <a href="./index.html" class="text-center bg-gray-300 font-bold text-md text-gray-600 hover:text-gray-800 
+      hover:scale-110 hover:text-white p-2 hover:bg-red-500 rounded-[24px] w-[132px] transition ease-in-out duration-200
+      ">Back</a>
     </div>
   </header>
 
   <main class="p-12 flex-col">
-    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 mt-6 place-items-center" id="pokemon-container"></div>
+    <!-- Search Bar -->
+    <div class="flex justify-center mb-6">
+      <input
+        id="search-bar"
+        class="p-3 rounded-2xl w-[64rem] border border-gray-300 text-gray-600 font-bold text-lg" 
+        type="text"
+        placeholder="Search Pokemon"
+      />
+    </div>
+    <br>
+    <!-- Pokémon Container -->
+    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-10 mt-6 place-items-center p-2" id="pokemon-container"></div>
   </main>
   
 

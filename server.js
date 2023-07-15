@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const {auth} = require('express-openid-connect');
+//const {auth} = require('express-openid-connect');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const port = process.env.PORT || 3000;
 const googleOAuthConfig = require('./config/googleOauth.config.js');
@@ -19,14 +19,14 @@ app.use((req, res, next) => {
 });
 
 // Connect to Google OAuth
-const passport = require('passport');
+// const passport = require('passport');
 
-passport.use(new GoogleStrategy(
-  googleOAuthConfig.config, 
-  (accessToken, refreshToken, profile, done) => {
-  // Implement your logic to handle the authenticated user profile
-  // This callback will be triggered after successful Google OAuth authentication
-}));
+// passport.use(new GoogleStrategy(
+//   googleOAuthConfig.config, 
+//   (accessToken, refreshToken, profile, done) => {
+//   // Implement your logic to handle the authenticated user profile
+//   // This callback will be triggered after successful Google OAuth authentication
+// }));
 
 
 // Authentication route
@@ -46,13 +46,13 @@ app.use('/', require('./routes'));
 
 
 // Login Route
-// app.get('/pokemon_index', (req, res) => {
-//   // Render the pokemon page here
-//   res.sendFile('pokemon_index.html', { root: 'frontend' });
-// });
+app.get('/pokemon_index', (req, res) => {
+  // Render the pokemon page here
+  res.sendFile('pokemon_index.html', { root: 'frontend' });
+});
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // Connect to the database and start the server
 const db = require('./models');

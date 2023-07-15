@@ -9,70 +9,61 @@ fetch('/pokemon')
 .then(pokeData => {
   console.log(pokeData)
   const pokeContainer = document.getElementById('pokemon-container');
+  pokeData.sort((a, b) => a.pokeName.localeCompare(b.pokeName));
+  const searchBar = document.getElementById('search-bar');
+      // Function to filter Pokémon based on search query
+      const filterPokemons = () => {
+        const searchQuery = searchBar.value.toLowerCase();
+        let filteredPokemons;
+      
+        if (searchQuery.trim() === '') {
+          // If search query is empty, sort by pokeDexNum
+          filteredPokemons = [...pokeData].sort((a, b) => a.pokeDexNum - b.pokeDexNum);
+        } else {
+          // Filter based on search query
+          filteredPokemons = pokeData.filter(pokemon =>
+            pokemon.pokeName.toLowerCase().includes(searchQuery)
+          );
+        }
+      
+        pokeContainer.innerHTML = '';
+      
+        filteredPokemons.forEach(pokemon => {
+          // const pokemonCard = createPokemonCard(pokemon);
+          // pokeContainer.appendChild(pokemonCard);
+          const pokemonCard = document.createElement('div');
+          pokemonCard.className = 'bg-white rounded-2xl shadow-lg w-[22rem] md:w-11/12 sm:h-auto hover:scale-110 transition ease-in-out duration-300 hover:z-0 z-1';
+          
+          pokemonCard.innerHTML = `
+          <div class="p-8 md:p-4 flex flex-col items-center md:flex-row">
+          <div class="aspect-w-1 aspect-h-1">
+          <img src="${pokemon.pokeImage}" alt="${pokemon.pokeName}" class="w-auto h-36 md:w-auto md:h-56 object-contain mb-4 md:mb-0  mt-8">
+          </div>
+            <div class="flex flex-col items-center md:items-start md:ml-8">
+              <h2 class="text-xl font-bold text-gray-800 max-w-prose mb-1">${pokemon.pokeName}, #${pokemon.pokeDexNum}</h2>
+              <h3 class="text-lg font-bold text-gray-800 mb-2 md:mb-4 max-w-prose">Specie: ${pokemon.pokeSpecie}</h3>
+              <h3 class="text-md italic font-bold text-gray-600 mb-2 md:mb-4 max-w-prose">Type: ${pokemon.pokeTypeOne}${pokemon.pokeTypeTwo ? `, ${pokemon.pokeTypeTwo}` : ''}</h3>
+              <h3 class="text-md md:text-sm italic font-bold text-gray-600 mb-2 md:mb-4 max-w-prose">Abilities: ${pokemon.pokeAbilityOne}${pokemon.pokeAbilityTwo ? `, ${pokemon.pokeAbilityTwo}` : ''}</h3>
+              <h3 class="text-md md:text-sm italic font-bold text-gray-600 max-w-prose">${pokemon.pokeDescription}</h3>
+            </div>
+          </div>
+        
+      
+          `;    
+      
+          pokeContainer.appendChild(pokemonCard);
+              
+        });
+      };
 
-  pokeData.forEach(pokemon => {
-    // const pokemonCard = createPokemonCard(pokemon);
-    // pokeContainer.appendChild(pokemonCard);
-    const pokemonCard = document.createElement('div');
-    pokemonCard.className = 'bg-white rounded-2xl shadow-2xl w-[22rem] md:w-auto';
-    
-    pokemonCard.innerHTML = `
-    <div class="p-8 md:p-4 flex flex-col items-center md:flex-row">
-      <img src="${pokemon.pokeImage}" alt="${pokemon.pokeName}" class="w-36 h-auto mb-4 md:mb-0 md:mr-4">
-      <div class="flex flex-col items-center md:items-start">
-        <h2 class="text-xl font-bold text-gray-800">${pokemon.pokeName}</h2>
-        <h3 class="text-lg font-bold text-gray-800 mb-2 md:mb-4">Specie: ${pokemon.pokeSpecie}</h3>
-        <h3 class="text-md italic font-bold text-gray-600 mb-2 md:mb-4">Type: ${pokemon.pokeTypeOne}, ${pokemon.pokeTypeTwo}</h3>
-        <h3 class="text-md md:text-sm italic font-bold text-gray-600 mb-2 md:mb-4">Abilities: ${pokemon.pokeAbilityOne}, ${pokemon.pokeAbilityTwo}</h3>
-        <h3 class="text-md md:text-sm italic font-bold text-gray-600">${pokemon.pokeDescription}</h3>
-      </div>
-    </div>
-  
+    // Add event listener to search bar
+    searchBar.addEventListener('input', filterPokemons);
 
-    `;    
+    // Initial rendering of Pokémon cards
+    filterPokemons();
 
-    pokeContainer.appendChild(pokemonCard);
-
-  });
 })
 .catch(error => {
   console.error(error);
   alert('Failed to fetch pokemon');
 });
-
-// function createPokemonCard(pokemon) {
-//   const { pokeName, pokeSpecie, pokeTypeOne, pokeTypeTwo, pokeDescription, pokeImage } = pokemon;
-
-//   const pokemonCard = document.createElement('div');
-//   pokemonCard.className = "bg-white rounded-2xl shadow-xl p-4 max-w-24 flex justify-center"
-
-//   const image = document.createElement('img');
-//   image.src = pokeImage;
-//   image.alt = pokeName;
-//   image.setAttribute('class', 'h-48 object-cover');
-
-//   const name = document.createElement('h3');
-//   name.textContent = pokeName;
-//   name.setAttribute('class', 'text-xl font-bold text-gray-800');
-
-//   const species = document.createElement('h4');
-//   species.textContent = `Species: ${pokeSpecie}`;
-//   species.setAttribute('class', 'text-md md:text-sm italic font-bold text-gray-600 mt-2 self-start sm:self-auto');
-
-//   const types = pokeTypeTwo ? `${pokeTypeOne}, ${pokeTypeTwo}` : pokeTypeOne;
-//   const type = document.createElement('h2');
-//   type.textContent = `Type: ${types}`;
-//   type.setAttribute('class', 'text-md italic font-bold text-gray-600 mt-2');
-
-//   const description = document.createElement('p');
-//   description.textContent = pokeDescription;
-//   description.setAttribute('class', 'text-gray-600 mt-2 w-[200px]');
-
-//   pokemonCard.appendChild(image);
-//   pokemonCard.appendChild(name);
-//   pokemonCard.appendChild(species);
-//   pokemonCard.appendChild(type);
-//   pokemonCard.appendChild(description);
-
-//   return pokemonCard;
-// }

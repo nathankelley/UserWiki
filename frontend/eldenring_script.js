@@ -17,7 +17,7 @@ fetch('/eldenring')
     
     bossCard.innerHTML = `
     <div class="p-8 md:p-4 flex flex-col items-center md:flex-row">
-      <img src="${boss.image}" alt="${boss.boss_name}" class="w-36 h-auto mb-4 md:mb-0 md:mr-4">
+      <img src="${boss.image}" alt="${boss.boss_name}" class="w-36 h-36 mb-4 md:mb-0 md:mr-4">
       <div class="flex flex-col items-center md:items-start">
         <h2 class="text-xl font-bold text-gray-800">${boss.boss_name}</h2>
         <h3 class="text-md md:text-sm font-bold text-gray-600">HP: ${boss.hp}</h3>
