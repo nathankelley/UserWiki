@@ -66,12 +66,12 @@ module.exports.getBoss = (req, res) => {
   
   module.exports.updateBoss = async (req, res) => {
     try {
-      const _id = req.params._id;
-      if (!_id) {
+      const boss_id = req.params._id;
+      if (!boss_id) {
         res.status(400).send({ message: 'Invalid ID Supplied' });
         return;
       }
-      Boss.replaceOne({ _id: _id }, {
+      Boss.replaceOne({ _id: boss_id }, {
         bossName: req.params.bossName,
         hp: req.body.hp,
         defense: req.body.defense,
@@ -96,12 +96,12 @@ module.exports.getBoss = (req, res) => {
   
   module.exports.deleteBoss = async (req, res) => {
     try {
-      const _id = req.params._id;
+      const boss_id = req.params._id;
       if (!boss_id) {
         res.status(400).send({ message: 'Invalid ID Supplied' });
         return;
       }
-      Boss.deleteOne({ _id: _id }).then(() => {
+      Boss.deleteOne({ _id: boss_id }).then(() => {
         res.status(204).send();
       }
       ).catch((err) => {

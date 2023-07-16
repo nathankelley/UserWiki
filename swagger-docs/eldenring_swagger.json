@@ -7,7 +7,7 @@
   },
   "host": "%HOST",
   "basePath": "/",
-  "schemes": ["https"],
+  "schemes": ["http"],
   "paths": {
     "/eldenring": {
       "get": {

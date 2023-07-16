@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 //const {auth} = require('express-openid-connect');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+//const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const port = process.env.PORT || 3000;
 const googleOAuthConfig = require('./config/googleOauth.config.js');
 
