@@ -41,7 +41,7 @@ app.get(
     { failureRedirect: '/login' }), 
     (req, res) => {
     // Handle successful authentication
-    res.redirect('/dashboard');
+    res.redirect('/');
   }
 );
 
