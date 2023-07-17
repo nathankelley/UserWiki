@@ -31,9 +31,6 @@ passport.use(
   )
 );
 
-//connect to routes folder
-app.use('/', require('./routes'));
-
 // Authentication route
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
@@ -47,6 +44,9 @@ app.get(
     res.redirect('/');
   }
 );
+
+//connect to routes folder
+app.use('/', require('./routes'));
 
 // Login Route
 // app.get('/pokemon_index', (req, res) => {
