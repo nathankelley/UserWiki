@@ -32,7 +32,7 @@ passport.use(
 );
 
 // Authentication route
-app.get('/api/sessions/oauth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+app.get('/login', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 // Callback route
 app.get(
