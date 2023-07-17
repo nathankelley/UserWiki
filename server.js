@@ -48,10 +48,10 @@ passport.use(
 // //connect to routes folder
 // app.use('/', require('./routes'));
 // Authentication route
-app.get('/oauth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 // Callback route
-app.get('/oauth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
+app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
   // Handle successful authentication
   res.redirect('/');
 });

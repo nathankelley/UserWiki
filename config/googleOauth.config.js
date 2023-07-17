@@ -19,7 +19,7 @@ module.exports = {
   config: {
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.SECRET,
-    callbackURL: 'https://userwiki.onrender.com/oauth/google/callback'
+    callbackURL: 'https://userwiki.onrender.com/auth/google/callback'
   },
   session: {
     secret: process.env.SECRET,
