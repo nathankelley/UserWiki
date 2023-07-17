@@ -32,21 +32,38 @@ passport.use(
 );
 
 // Authentication route
+// app.get('/oauth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+// // // Callback route
+// app.get(
+//     '/auth/google/callback', 
+//     passport.authenticate('google', 
+//     { failureRedirect: '/login' }), 
+//     (req, res) => {
+//     // Handle successful authentication
+//     res.redirect('/dashboard');
+//   }
+// );
+
+// //connect to routes folder
+// app.use('/', require('./routes'));
+// Authentication route
 app.get('/oauth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-// // Callback route
-app.get(
-    '/auth/google/callback', 
-    passport.authenticate('google', 
-    { failureRedirect: '/login' }), 
-    (req, res) => {
-    // Handle successful authentication
-    res.redirect('/dashboard');
-  }
-);
+// Callback route
+app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
+  // Handle successful authentication
+  res.redirect('/dashboard');
+});
 
-//connect to routes folder
+// Serve index.html file
+app.get('/', (req, res) => {
+  res.sendFile('index.html', { root: __dirname });
+});
+
+// Connect to routes folder
 app.use('/', require('./routes'));
+
 
 // Login Route
 // app.get('/pokemon_index', (req, res) => {
