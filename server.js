@@ -58,7 +58,7 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
 
 // Serve index.html file
 app.get('/', (req, res) => {
-  res.sendFile('index.html', { root: __dirname });
+  res.sendFile('index.html', { root: 'frontend' });
 });
 
 // Connect to routes folder
