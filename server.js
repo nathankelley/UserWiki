@@ -46,6 +46,7 @@ passport.use(
 // );
 
 // //connect to routes folder
+
 // app.use('/', require('./routes'));
 // Authentication route
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
