@@ -16,6 +16,9 @@ app.use((req, res, next) => {
   next();
 });
 
+// Connect to routes folder
+app.use('/', require('./routes'));
+
 // Connect to Google OAuth
 const authConfig = require('./config/googleOauth.config.js');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -44,11 +47,6 @@ app.get(
     res.redirect('/');
   }
 );
-
-// Connect to routes folder
-app.use('/', require('./routes'));
-
-
 
 // Login Route
 // app.get('/pokemon_index', (req, res) => {
