@@ -51,10 +51,10 @@ app.use('/', require('./routes'));
 
 
 // Login Route
-app.get('/pokemon_index', (req, res) => {
-  // Render the pokemon page here
-  res.sendFile('pokemon_index.html', { root: 'frontend' });
-});
+// app.get('/pokemon_index', (req, res) => {
+//   // Render the pokemon page here
+//   res.sendFile('pokemon_index.html', { root: 'frontend' });
+// });
 
 // Connect to the database and start the server
 const db = require('./models');
