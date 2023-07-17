@@ -19,17 +19,4 @@ routes.use('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
-// Authentication route
-routes.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-
-// Callback route
-routes.get(
-  '/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  (req, res) => {
-    // Handle successful authentication
-    res.redirect('/');
-  }
-);
-
 module.exports = routes;

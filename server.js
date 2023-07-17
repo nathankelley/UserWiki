@@ -31,29 +31,28 @@ passport.use(
   )
 );
 
+//connect to routes folder
+app.use('/', require('./routes'));
+
 // Authentication route
-// app.get('/oauth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 // // Callback route
-// app.get(
-//     '/auth/google/callback', 
-//     passport.authenticate('google', 
-//     { failureRedirect: '/login' }), 
-//     (req, res) => {
-//     // Handle successful authentication
-//     res.redirect('/');
-//   }
-// );
+app.get(
+    '/auth/google/callback', 
+    passport.authenticate('google', 
+    { failureRedirect: '/login' }), 
+    (req, res) => {
+    // Handle successful authentication
+    res.redirect('/');
+  }
+);
 
 // Login Route
 // app.get('/pokemon_index', (req, res) => {
 //   // Render the pokemon page here
 //   res.sendFile('pokemon_index.html', { root: 'frontend' });
 // });
-
-
-//connect to routes folder
-app.use('/', require('./routes'));
 
 // Connect to the database and start the server
 const db = require('./models');
