@@ -3,44 +3,33 @@ const users = require('./users');
 const pokemon = require('./pokemon');
 const eldenring = require('./eldenring');
 const path = require('path');
+const passport = require('passport');
+
 routes.use('/', require('./swagger'));
 
 routes.use('/', users);
 routes.use('/', pokemon);
 routes.use('/', eldenring);
 
-// routes.use('/', inventory);
-// routes.use('/', (req, res, next) => {
-//   if (req.oidc.isAuthenticated()) {
-//     // User is authenticated
-//     let docData = {
-//       // documentationURL: 'https://cse341-mw5a.onrender.com/api-docs',
-//       message: 'You are logged in! API doc is at https://cse341-mw5a.onrender.com/api-docs'
-//     };
-//     res.send(docData);
-//   } else {
-//     // User is not authenticated
-//     let docData = {
-//       // documentationURL: 'https://cse341-mw5a.onrender.com/api-docs',
-//       message: 'Welcome guest! Please login.'
-//     };
-//     res.send(docData);
-//   }
-// });
-
-// ...
 routes.use('/login', (req, res, next) => {
-    
-    res.sendFile(path.join(__dirname, '../frontend/login.html'));
-
-
+  res.sendFile(path.join(__dirname, '../frontend/login.html'));
 });
+
 routes.use('/', (req, res, next) => {
-    
-    res.sendFile(path.join(__dirname, '../frontend/index.html'));
-
-
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
+// Authentication route
+routes.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+// Callback route
+routes.get(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Handle successful authentication
+    res.redirect('/');
+  }
+);
 
 module.exports = routes;

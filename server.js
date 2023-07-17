@@ -16,9 +16,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Connect to routes folder
-app.use('/', require('./routes'));
-
 // Connect to Google OAuth
 const authConfig = require('./config/googleOauth.config.js');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -35,7 +32,7 @@ passport.use(
 );
 
 // Authentication route
-app.get('/login', passport.authenticate('google', { scope: ['profile', 'email'] }));
+app.get('/oauth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 // Callback route
 app.get(
