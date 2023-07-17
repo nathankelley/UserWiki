@@ -1,9 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 //const {auth} = require('express-openid-connect');
-//const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const port = process.env.PORT || 3000;
-const googleOAuthConfig = require('./config/googleOauth.config.js');
 
 
 const app = express();
@@ -19,24 +17,33 @@ app.use((req, res, next) => {
 });
 
 // Connect to Google OAuth
-// const passport = require('passport');
+const authConfig = require('./config/googleOauth.config.js');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const passport = require('passport');
 
-// passport.use(new GoogleStrategy(
-//   googleOAuthConfig.config, 
-//   (accessToken, refreshToken, profile, done) => {
-//   // Implement your logic to handle the authenticated user profile
-//   // This callback will be triggered after successful Google OAuth authentication
-// }));
-
+passport.use(
+  new GoogleStrategy(
+    authConfig.config,
+    (accessToken, refreshToken, profile, done) => {
+      // Implement your logic to handle the authenticated user profile
+      // This callback will be triggered after successful Google OAuth authentication
+    }
+  )
+);
 
 // Authentication route
-// app.get('/api/sessions/oauth/google', authConfig.authenticate('google', { scope: ['profile', 'email'] }));
+app.get('/api/sessions/oauth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-// // Callback route
-// app.get('/auth/google/callback', authConfig.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-//   // Handle successful authentication
-//   res.redirect('/dashboard');
-// });
+// Callback route
+app.get(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Handle successful authentication
+    res.redirect('/dashboard');
+  }
+);
+
 
 
 
