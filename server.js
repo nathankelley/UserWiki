@@ -53,7 +53,7 @@ app.get('/oauth/google', passport.authenticate('google', { scope: ['profile', 'e
 // Callback route
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
   // Handle successful authentication
-  res.redirect('/dashboard');
+  res.redirect('/');
 });
 
 // Serve index.html file
