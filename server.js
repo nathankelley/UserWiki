@@ -36,16 +36,14 @@ app.get('/api/sessions/oauth/google', passport.authenticate('google', { scope: [
 
 // Callback route
 app.get(
-  '/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  (req, res) => {
+    '/auth/google/callback', 
+    passport.authenticate('google', 
+    { failureRedirect: '/login' }), 
+    (req, res) => {
     // Handle successful authentication
     res.redirect('/dashboard');
   }
 );
-
-
-
 
 // Connect to routes folder
 app.use('/', require('./routes'));
@@ -58,9 +56,6 @@ app.get('/pokemon_index', (req, res) => {
   res.sendFile('pokemon_index.html', { root: 'frontend' });
 });
 
-// app.use(passport.initialize());
-// app.use(passport.session());
-
 // Connect to the database and start the server
 const db = require('./models');
 db.mongoose
@@ -72,7 +67,7 @@ db.mongoose
   .then(() => {
     // Listen on the specified port
     app.listen(3000, () => {
-      console.log(`Server listening on port ${port}`);
+      console.log(`Connected to db. Server listening on port ${port}`);
     });
   })
   .catch(err => {
