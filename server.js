@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 //const {auth} = require('express-openid-connect');
 const port = process.env.PORT || 3000;
+require('./config/auth.config');
 
 
 const app = express();
@@ -16,61 +17,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// Connect to Google OAuth
-const authConfig = require('./config/googleOauth.config.js');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const passport = require('passport');
-
-passport.use(
-  new GoogleStrategy(
-    authConfig.config,
-    (accessToken, refreshToken, profile, done) => {
-      // Implement your logic to handle the authenticated user profile
-      // This callback will be triggered after successful Google OAuth authentication
-    }
-  )
-);
-
-// Authentication route
-// app.get('/oauth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-
-// // // Callback route
-// app.get(
-//     '/auth/google/callback', 
-//     passport.authenticate('google', 
-//     { failureRedirect: '/login' }), 
-//     (req, res) => {
-//     // Handle successful authentication
-//     res.redirect('/dashboard');
-//   }
-// );
-
-// //connect to routes folder
-
-// app.use('/', require('./routes'));
-// Authentication route
-app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-
-// Callback route
-app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-  // Handle successful authentication
-  res.redirect('/');
-});
-
-// Serve index.html file
-app.get('/', (req, res) => {
-  res.sendFile('index.html', { root: 'frontend' });
-});
-
-// Connect to routes folder
 app.use('/', require('./routes'));
 
-
-// Login Route
-// app.get('/pokemon_index', (req, res) => {
-//   // Render the pokemon page here
-//   res.sendFile('pokemon_index.html', { root: 'frontend' });
-// });
 
 // Connect to the database and start the server
 const db = require('./models');
