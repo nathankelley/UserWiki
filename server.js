@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-//const {auth} = require('express-openid-connect');
+const {auth} = require('express-openid-connect');
 const port = process.env.PORT || 3000;
 
 
@@ -21,15 +21,15 @@ const authConfig = require('./config/googleOauth.config.js');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const passport = require('passport');
 
-passport.use(
-  new GoogleStrategy(
-    authConfig.config,
-    (accessToken, refreshToken, profile, done) => {
-      // Implement your logic to handle the authenticated user profile
-      // This callback will be triggered after successful Google OAuth authentication
-    }
-  )
-);
+// passport.use(
+//   new GoogleStrategy(
+//     authConfig.config,
+//     (accessToken, refreshToken, profile, done) => {
+//       // Implement your logic to handle the authenticated user profile
+//       // This callback will be triggered after successful Google OAuth authentication
+//     }
+//   )
+// );
 
 // Authentication route
 // app.get('/oauth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
