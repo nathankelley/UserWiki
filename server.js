@@ -3,34 +3,40 @@ const bodyParser = require('body-parser');
 const {auth} = require('express-openid-connect');
 const port = process.env.PORT || 3000;
 require('./config/auth.config');
+const path = require('path');
 
 
 const app = express();
-// Serve static files from the frontend folder
-app.use(express.static('frontend', { index: false }));
+
+// // Serve static files from the frontend folder
+// app.use(express.static('frontend', { index: false }));
+
+// Serve all files from the frontend folder
+app.use(express.static('frontend'));
 
 
 // The body parse
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   next();
 });
 
 // Connect to Google OAuth
-const authConfig = require('./config/googleOauth.config.js');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const passport = require('passport');
+// const authConfig = require('./config/auth.config.js');
+// const GoogleStrategy = require('passport-google-oauth20').Strategy;
+// const passport = require('passport');
 
-passport.use(
-  new GoogleStrategy(
-    authConfig.config,
-    (accessToken, refreshToken, profile, done) => {
-      // Implement your logic to handle the authenticated user profile
-      // This callback will be triggered after successful Google OAuth authentication
-    }
-  )
-);
+// passport.use(
+//   new GoogleStrategy(
+//     authConfig.config,
+//     (accessToken, refreshToken, profile, done) => {
+//       // Implement your logic to handle the authenticated user profile
+//       // This callback will be triggered after successful Google OAuth authentication
+//     }
+//   )
+// );
 
 // Authentication route
 // app.get('/oauth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
@@ -50,13 +56,13 @@ passport.use(
 
 // app.use('/', require('./routes'));
 // Authentication route
-app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+// app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 // Callback route
-app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-  // Handle successful authentication
-  res.redirect('/');
-});
+// app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
+//   // Handle successful authentication
+//   res.redirect('/');
+// });
 
 // Serve index.html file
 app.get('/', (req, res) => {

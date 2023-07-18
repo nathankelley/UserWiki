@@ -38,7 +38,9 @@ module.exports.getUser = async (req, res, next) => {
 };
 
 module.exports.addUser = async (req, res) => {
+  
   try {
+    console.log('Request body:', req.body);
     const { error: emailError } = emailSchema.validate(req.body.email);
     if (emailError) {
       res.status(400).send({ message: emailError.details[0].message });
@@ -77,9 +79,7 @@ module.exports.addUser = async (req, res) => {
       email: req.body.email,
       password: req.body.password,
       birthDate: req.body.birthDate,
-      phone: req.body.phone,
-      country: req.body.country,
-      profileImg: req.body.profileImg
+      profileImg: req.body.profileImg || ""
     });
 
     const savedUser = await newUser.save();
@@ -100,7 +100,6 @@ module.exports.editUser = async (req, res) => {
       lastName,
       birthDate,
       phone,
-      country,
       profileImg
     } = req.body;
 
@@ -154,7 +153,6 @@ module.exports.editUser = async (req, res) => {
     user.lastName = lastName || user.lastName;
     user.birthDate = birthDate || user.birthDate;
     user.phone = phone || user.phone;
-    user.country = country || user.country;
     user.profileImg = profileImg || user.profileImg;
 
     await user.save();
