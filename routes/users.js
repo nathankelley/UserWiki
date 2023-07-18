@@ -3,7 +3,7 @@ const usersController = require('../controllers/usersController.js');
 // const { requiresAuth } = require('express-openid-connect');
 
 // GET all users
-routes.get('/users', usersController.getAllUsers);
+routes.get('/register', usersController.getAllUsers);
 
 // GET a user
 routes.get('/users/:username', usersController.getUser);
