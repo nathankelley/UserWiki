@@ -10,8 +10,10 @@ fetch('/eldenring')
   console.log(eldenData)
   const eldenContainer = document.getElementById('elden-container');
 
-  eldenData.forEach(boss => {
-    
+  // SORT
+  eldenData.sort((a, b) => a.boss_name.localeCompare(b.boss_name));
+
+  eldenData.forEach(boss => {  
     const bossCard = document.createElement('div');
     bossCard.className = 'bg-white rounded-2xl shadow-2xl w-[22rem] md:w-auto';
     
@@ -43,7 +45,6 @@ fetch('/eldenring')
     `
 
     eldenContainer.appendChild(bossCard);
-
   });
 })
 .catch(error => {
