@@ -12,6 +12,7 @@ routes.use('/', require('./swagger'));
 routes.use('/', users);
 routes.use('/', pokemon);
 routes.use('/', eldenring);
+routes.use('/', halo);
 
 // app.get('/auth/google',
 //   passport.authenticate('google', { scope: ['email', 'profile'] })
