@@ -1,0 +1,156 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Halo API",
+      "description": "Documentation regarding Halo species, descriptions of their appearance, and specific information about their species origin and relationship with the Covenant.",
+      "version": "1.0.0"
+    },
+    "host": "%HOST",
+    "basePath": "/",
+    "schemes": ["http"],
+    "paths": {
+      "/halo": {
+        "get": {
+          "tags": ["Halo Species"],
+          "description": "Get Halo species information",
+          "produces": ["application/json"],
+          "parameters": [],
+          "responses": {
+            "200": { "description": "OK" }
+          }
+        },
+        "post": {
+          "tags": ["Halo Species"],
+          "description": "Submit a Halo species",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "schema": {
+                "type": "object",
+                "properties": {
+                    "species_name": { "example": "Kig-Yar" },
+                    "sub_species": { "example": ["Ibie'shan", "Ruuhtian", "T'vaoan"] },
+                    "avg_height": { "example": "190 to 210 cm (6 ft 2 in to 6 ft 8 due to hunched over anatomy they appear shorter about 5ft or 155 cm)" },
+                    "avg_weight": { "example": "88 to 93 kilograms (195 to 206 lbs)" },
+                    "avg_lifespan": { "example": "unknown" },
+                    "homeworld": { "example": "Eayn" },
+                    "characteristics": { "example": "Sinewy and slender; dinosauroid features, tridactyl clawed hands and feet" },
+                    "description": { "example": "The Kig-Yar (sometimes rendered as \"Kig-yar\"; Forerunner designation: Perosus latrunculus, Latin for \"hateful bandit\"; UNSC designation: Covenant secundarium carnivora prœdonis, Latin for \"Covenant secondary carnivorous combatant\"), are a dinosaur-like saurian species. Following their assimilation in 1342 CE, the Kig-Yar served the Covenant until its dissolution in 2552. Many went on to aid its remnants as mercenaries, privateers, and pirates, though the majority stayed independent of any such factions.\nThere are several distinct races of Kig-Yar, though humans have commonly identified two groupings (Jackals and Skirmishers) based on encounters in the battlefield. In combat, Kig-Yar typically served the Covenant as snipers and scouts due to their excellent senses of sight, smell, and hearing." },
+                    "image": { "example": "https://halo.wiki.gallery/images/thumb/4/44/HINF_Kig-Yar_Raider.png/541px-HINF_Kig-Yar_Raider.png?20220113083148" }
+                }
+              }
+            }
+          ],
+        "security": [
+          {
+            
+          }
+        ],
+        "responses": {
+          "201": { "description": "Halo species submitted successfully!" },
+          "500": { "description": "Internal Server Error" }
+          }
+        }
+      },
+        "/halo/{id}": {
+          "get": {
+            "tags": ["Halo Species"],
+            "description": "Get specific information about a Halo species, use the ID to search.",
+            "produces": [ "application/json" ],
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              }
+            ],
+            "responses": {
+              "200": { "description": "OK" }
+            }
+        },
+        "put": {
+          "tags": ["Halo Species"],
+          "description": "Update an existing Halo species by it's ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "species_name": { "example": "Kig-Yar" },
+                  "sub_species": { "example": ["Ibie'shan", "Ruuhtian", "T'vaoan"] },
+                  "avg_height": { "example": "190 to 210 cm (6 ft 2 in to 6 ft 8 due to hunched over anatomy they appear shorter about 5ft or 155 cm)" },
+                  "avg_weight": { "example": "88 to 93 kilograms (195 to 206 lbs)" },
+                  "avg_lifespan": { "example": "unknown" },
+                  "homeworld": { "example": "Eayn" },
+                  "characteristics": { "example": "Sinewy and slender; dinosauroid features, tridactyl clawed hands and feet" },
+                  "description": { "example": "The Kig-Yar (sometimes rendered as \"Kig-yar\"; Forerunner designation: Perosus latrunculus, Latin for \"hateful bandit\"; UNSC designation: Covenant secundarium carnivora prœdonis, Latin for \"Covenant secondary carnivorous combatant\"), are a dinosaur-like saurian species. Following their assimilation in 1342 CE, the Kig-Yar served the Covenant until its dissolution in 2552. Many went on to aid its remnants as mercenaries, privateers, and pirates, though the majority stayed independent of any such factions.\nThere are several distinct races of Kig-Yar, though humans have commonly identified two groupings (Jackals and Skirmishers) based on encounters in the battlefield. In combat, Kig-Yar typically served the Covenant as snipers and scouts due to their excellent senses of sight, smell, and hearing." },
+                  "image": { "example": "https://halo.wiki.gallery/images/thumb/4/44/HINF_Kig-Yar_Raider.png/541px-HINF_Kig-Yar_Raider.png?20220113083148" }
+                }
+              }
+            }
+          ],
+          "security": [
+            {
+  
+            }
+          ],
+          "responses": {
+            "204": { "description": "Halo species updated successfully." },
+            "500": { "description": "Internal Server Error" }
+          }
+        },
+        "delete": {
+          "tags": ["Halo Species"],
+          "description": "Delete an existing Halo species",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "security": [
+            {
+  
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Halo species deleted successfully. Boo."
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Halo Species": {
+        "type": "object",
+        "properties": {
+          "species_name": { "type": "String" },
+          "sub_species": { "type": "Array" },
+          "avg_height": { "type": "String" },
+          "avg_weight": { "type": "String" },
+          "avg_lifespan": { "type": "String" },
+          "homeworld": { "type": "String" },
+          "characteristics": { "type": "String" },
+          "description": { "type": "String" },
+          "image": { "type": "String" }
+        }
+      }
+    }
+  }
+  

@@ -3,6 +3,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger-docs/users_swagger.json');
 const swaggerPokemonDocument = require('../swagger-docs/pokemon_swagger.json');
 const swaggerEldenRingDocument = require('../swagger-docs/eldenring_swagger.json');
+const swaggerHaloDocument = require('../swagger-docs/halo_swagger.json');
 const isLocal = process.env.NODE_ENV !== 'production';
 
 // Function to update the host dynamically in the Swagger JSON
@@ -26,6 +27,12 @@ router.get('/api-docs/pokemon', (req, res) => {
 router.get('/api-docs/eldenring', (req, res) => {
   updateSwaggerHost(swaggerEldenRingDocument, req);
   res.send(swaggerUi.generateHTML(swaggerEldenRingDocument, { routePrefix: '/api-docs/eldenring' }));
+});
+
+router.get('/api-docs/halo', (req, res) => {
+  updateSwaggerHost(swaggerHaloDocument, req);
+  res.send(swaggerUi.generateHTML(swaggerHaloDocument, {
+    routePrefix: '/api-docs/halo' }));
 });
 
 module.exports = router;

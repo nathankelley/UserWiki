@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>User Wiki - Halo</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles_output.css">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <!-- Header -->
+        <header class="bg-white py-4 px-6 shadow">
+          <div class=" mx-auto flex flex-row items-center justify-between">
+            <h1 class="text-2xl font-bold text-gray-800">User Wiki</h1>
+            <!-- <a href="/logout" class="text-center font-bold text-md text-gray-600 hover:text-gray-800 hover:scale-110 hover:text-white p-2 hover:bg-red-500 rounded-[24px] w-[132px]">Logout</a> -->
+          </div>
+        </header>
+    
+        <main class="p-12 flex-col">
+          <h2 class="text-2xl font-bold text-gray-800">Halo</h2>
+          <p class="text-lg font-bold text-gray-800 pb-10">Hover over each card to view details of common species in Halo</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 mt-6 place-items-center" id="halo-container">
+          </div>
+        </main>
+
+
+        
+        <script src="halo_script.js" async defer></script>
+    </body>
+</html>
