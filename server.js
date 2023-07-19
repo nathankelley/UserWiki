@@ -46,10 +46,9 @@ app.use(passport.session());
 
 //Store the google user
 passport.serializeUser((user, done) => {
-  // Store the unique identifier of the user in the session
-  done(null, user.id);
+  // Store the user's email in the session instead of user.id
+  done(null, user.emails[0].value);
 });
-
 
 // Connect to the database and start the server
 const db = require('./models');

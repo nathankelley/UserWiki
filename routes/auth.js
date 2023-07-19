@@ -36,13 +36,15 @@ routes.get('/auth/google', passport.authenticate('google', {
     scope: ['profile', 'email']
 }));
 //
-routes.get('/auth/google/redirect', passport.authenticate('google', { failureRedirect: '/login' }),
-  (req, res) => {
-    // This function will be executed after successful Google authentication
-    // Redirect the user to the dashboard page
-    res.redirect('/dashboard');
-  }
-);
+routes.get(
+    '/auth/google/redirect',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    authController.checkOrCreateUser, // This middleware will be executed after successful Google authentication
+    (req, res) => {
+      // Redirect the user to the dashboard page
+      res.redirect('/dashboard');
+    }
+  );
 
 
 

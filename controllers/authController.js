@@ -59,8 +59,6 @@ const checkOrCreateUser = async (req, res, next) => {
         // If the user doesn't exist, create a new user in the database
         const newUser = new User({
           email,
-          firstName,
-          lastName,
           // You can add other user properties as needed for a new user
         });
   
