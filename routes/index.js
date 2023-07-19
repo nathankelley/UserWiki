@@ -5,20 +5,18 @@ const eldenring = require('./eldenring');
 const halo = require('./halo');
 const path = require('path');
 const passport = require('passport');
+const { appendFile } = require('fs');
 
 routes.use('/', require('./swagger'));
 
 routes.use('/', users);
 routes.use('/', pokemon);
 routes.use('/', eldenring);
-routes.use('/', halo);
 
-routes.use('/login', (req, res, next) => {
-  res.sendFile(path.join(__dirname, '../frontend/login.html'));
-});
+// app.get('/auth/google',
+//   passport.authenticate('google', { scope: ['email', 'profile'] })
+// );
 
-routes.use('/', (req, res, next) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
-});
+// app.get('auth/failure', (req, res))
 
 module.exports = routes;

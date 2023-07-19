@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>User Wiki - Register</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles_output.css">
+    </head>
+    <body>
+      <header class="bg-white mt-12 p-16 px-6">
+        <div class=" mx-auto flex flex-col items-center justify-between">
+            <h1 class="text-4xl font-bold text-gray-800">Welcome to User Wiki's</h1>
+            
+       </div>
+      </header> 
+      <h1 class="text-4xl font-bold text-gray-800">signing up is quick</h1>
+      <div class="w-screen flex justify-center items-center">
+        <div class="p-12 mt-12 bg-white rounded-2xl shadow-2xl w-[32rem]">
+          <form action="/addUser" method="POST" >
+
+            <label for="username" class="block mb-4 font-bold text-gray-600">Username</label>
+            <input type="text" id="username" name="username" required class="block w-full px-4 p-2 border border-gray-300 rounded-2xl mb-4">
+
+            <label for="password" class="block mb-4 font-bold text-gray-600">Password:</label>
+            <input type="password" id="password" name="password" required class="block w-full px-4 p-2 border border-gray-300 rounded-2xl mb-4">
+
+            <label for="email" class="block mb-4 font-bold text-gray-600">Email:</label>
+            <input type="email" id="email" name="email" required class="block w-full px-4 p-2 border border-gray-300 rounded-2xl mb-4">
+
+            <label for="firstName" class="block mb-4 font-bold text-gray-600">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required class="block w-full px-4 p-2 border border-gray-300 rounded-2xl mb-4">
+
+            <label for="lastName" class="block mb-4 font-bold text-gray-600">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" class="block w-full px-4 p-2 border border-gray-300 rounded-2xl mb-4">
+
+            <label for="birthDate" class="block mb-4 font-bold text-gray-600">Birthday:</label>
+            <input type="date" id="birthDate" name="birthDate" required class="block w-full px-4 p-2 border border-gray-300 rounded-2xl mb-4">
+            <input type="hidden" name="profileImg" value="">
+            
+            <input type="submit" class="text-center bg-gray-300 font-bold text-md text-gray-600 hover:text-gray-800 
+            hover:scale-[105%] hover:text-white p-2 hover:bg-blue-500 rounded-2xl w-full transition ease-in-out duration-200
+            " value="register">Register</input>
+          </form>
+          <br>
+          <!-- <p class="text-center font-bold text-gray-600">Or sign in with:</p> -->
+          
+          <button id="googleSignInButton" class="text-center bg-gray-300 font-bold text-md text-gray-600 hover:text-gray-800 
+          hover:scale-[105%] hover:text-white p-2 hover:bg-lime-500 rounded-2xl w-full transition ease-in-out duration-200
+          ">Sign In with Google</button>
+          <br>
+          <p class="text-center font-bold text-gray-600 mt-4">Don't have an account? <a href="/register" class="text-blue-500">Register Now</a></p>
+        </div>
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const registrationForm = document.getElementById('registrationForm');
+      
+          registrationForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent the default form submission behavior
+      
+            // You can optionally perform additional validations here before submitting the form
+            // For example, check if all required fields are filled or validate email/password
+      
+            // Now, you can manually submit the form using JavaScript
+            registrationForm.submit();
+          });
+        });
+      </script>
+      
+    </body>
+</html>
