@@ -51,7 +51,7 @@ module.exports.addUser = async (req, res) => {
       res.status(400).send({ message: passwordError.details[0].message });
       return;
     }
-    if (!req.body.username || !req.body.password || !req.body.email) {
+    if (!req.body.username || !req.body.password || !req.body.email || !req.body.firstName) {
       res.status(400).send({ message: 'username, password, and email cannot be empty!' });
       return;
     }
@@ -86,7 +86,7 @@ module.exports.addUser = async (req, res) => {
     const savedUser = await newUser.save();
     
     // Redirect to the dashboard page
-    res.redirect('/dashboard');
+    res.redirect('/login?success=true');
   } catch (err) {
     res.status(500).json(err);
   }

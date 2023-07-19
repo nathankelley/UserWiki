@@ -5,6 +5,7 @@ const eldenring = require('./eldenring');
 const halo = require('./halo');
 const { appendFile } = require('fs');
 const views = require('./views');
+const auth = require('./auth');
 
 routes.use('/', require('./swagger'));
 
@@ -13,6 +14,7 @@ routes.use('/', pokemon);
 routes.use('/', eldenring);
 routes.use('/', halo);
 routes.use('/', views);
+routes.use('/', auth);
 
 // app.get('/auth/google',
 //   passport.authenticate('google', { scope: ['email', 'profile'] })
