@@ -9,10 +9,10 @@ const path = require('path');
 const app = express();
 
 // // Serve static files from the frontend folder
-// app.use(express.static('frontend', { index: false }));
+app.use(express.static('frontend', { index: false }));
 
 // Serve all files from the frontend folder
-app.use(express.static('frontend'));
+// app.use(express.static('frontend'));
 
 
 // The body parse
