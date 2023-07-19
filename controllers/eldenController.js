@@ -72,7 +72,7 @@ module.exports.getBoss = (req, res) => {
         return;
       }
       Boss.replaceOne({ _id: boss_id }, {
-        bossName: req.params.bossName,
+        boss_name: req.params.boss_name,
         hp: req.body.hp,
         defense: req.body.defense,
         stance: req.body.stance,
