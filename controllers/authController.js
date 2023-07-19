@@ -2,40 +2,6 @@ const db = require('../models');
 const User = db.users;
 const bcrypt = require('bcrypt');
 
-// async function comparePasswords(password, hashedPassword) {
-//   return await bcrypt.compare(password, hashedPassword);
-// }
-
-// module.exports.authLocal = async (req, res) => {
-//   try {
-//     const { username, password } = req.body;
-
-//     // Check the username against the database
-//     const user = await User.findOne({ username: username });
-
-//     if (!user || !(await comparePasswords(password, user.password))) {
-//       // If the user is not found or the password is incorrect, send an error response
-//       res.status(401).json({ message: 'Invalid credentials' });
-//       return;
-//     }
-
-//     // If the authentication is successful, store the user information in the session
-//     req.session.user = {
-//       username: user.username,
-//       firstName: user.firstName,
-//       lastName: user.lastName,
-//       // Include other user information you need in the session (excluding the password)
-//     };
-
-//     // Redirect the user to the dashboard
-//     res.redirect('/dashboard');
-//   } catch (err) {
-//     // Handle any errors that occurred during authentication
-//     console.error('Error during authentication:', err);
-//     res.status(500).json({ message: 'An error occurred during login' });
-//   }
-// };
-
 async function authLocal(username, password) {
     try {
       // Find the user in the database based on the provided username
@@ -82,8 +48,56 @@ async function authLocal(username, password) {
 //       return 'failure';
 //     }
 //   }
+
+const checkOrCreateUser = async (req, res, next) => {
+    try {
+      const email = req.session.passport.user;
+      // Check if the user with the email exists in the database
+      const existingUser = await User.findOne({ email });
   
+      if (!existingUser) {
+        // If the user doesn't exist, create a new user in the database
+        const newUser = new User({
+          email,
+          firstName,
+          lastName,
+          // You can add other user properties as needed for a new user
+        });
+  
+        // Save the new user to the database
+        await newUser.save();
+  
+        // Store the new user's details in the session for future use
+        req.session.user = {
+          _id: newUser._id,
+          email: newUser.email,
+          firstName: newUser.firstName,
+          lastName: newUser.lastName,
+          // You can add other user properties here if needed
+        };
+      } else {
+        // If the user exists, store their details in the session
+        req.session.user = {
+          _id: existingUser._id,
+          email: existingUser.email,
+          firstName: existingUser.firstName,
+          lastName: existingUser.lastName
+          // You can add other user properties here if needed
+        };
+  
+        // Log the user information from the session to the console
+        console.log('User Information from Session:', req.session.user);
+      }
+  
+      // Move to the next middleware or route handler
+      next();
+    } catch (error) {
+      // Handle any errors that occur during user creation or database operations
+      res.status(500).json({ error: 'Error creating user or database operation.' });
+    }
+  };
   
   module.exports = {
     authLocal,
+    checkOrCreateUser
   };
