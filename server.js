@@ -6,15 +6,7 @@ const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 
 authConfig = require('./config/auth.config');
-
-
 const app = express();
-
-app.use((req, res, next) => {
-  // Remove the 'ch-ua-form-factor' feature from the Permissions-Policy header
-  res.setHeader('Permissions-Policy', 'geolocation=(), camera=(), microphone=()');
-  next();
-});
 
 // Configure the session middleware
 app.use(
@@ -23,20 +15,6 @@ app.use(
     resave: false,
     saveUninitialized: true,
   })
-);
-
-// Initialize passport and session middleware
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.use(
-  new GoogleStrategy(
-    authConfig.config,
-    (accessToken, refreshToken, profile, done) => {
-      // Implement your logic to handle the authenticated user profile
-      // This callback will be triggered after successful Google OAuth authentication
-    }
-  )
 );
 
 // // Serve static files from the frontend folder
@@ -57,6 +35,20 @@ app.get('/', (req, res) => {
 
 // Connect to routes folder
 app.use('/', require('./routes'));
+
+const googleStrategy = require('./config/auth.config');
+
+passport.use(googleStrategy);
+
+// Initialize passport and session middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Store the google user
+passport.serializeUser((user, done) => {
+  // Store the unique identifier of the user in the session
+  done(null, user.id);
+});
 
 
 // Connect to the database and start the server

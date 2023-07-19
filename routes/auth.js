@@ -36,11 +36,14 @@ routes.get('/auth/google', passport.authenticate('google', {
     scope: ['profile', 'email']
 }));
 //
-routes.get('/auth/google/callback', passport.authenticate('google', { 
-    successRedirect: '/dashboard', 
-    failureRedirect: '/login' 
-    })
+routes.get('/auth/google/redirect', passport.authenticate('google', { failureRedirect: '/login' }),
+  (req, res) => {
+    // This function will be executed after successful Google authentication
+    // Redirect the user to the dashboard page
+    res.redirect('/dashboard');
+  }
 );
+
 
 
 
