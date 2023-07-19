@@ -10,6 +10,12 @@ authConfig = require('./config/auth.config');
 
 const app = express();
 
+app.use((req, res, next) => {
+  // Remove the 'ch-ua-form-factor' feature from the Permissions-Policy header
+  res.setHeader('Permissions-Policy', 'geolocation=(), camera=(), microphone=()');
+  next();
+});
+
 // Configure the session middleware
 app.use(
   session({
@@ -32,9 +38,6 @@ passport.use(
     }
   )
 );
-
-
-
 
 // // Serve static files from the frontend folder
 app.use(express.static('frontend', { index: false }));
