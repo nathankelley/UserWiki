@@ -29,4 +29,15 @@ routes.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/dashboard.html'));
 });
 
+routes.get('/pokemon_index', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/pokemon_index.html'));
+})
+
+routes.get('/halo_index', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/halo_index.html'));
+})
+routes.get('/eldenring_index', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/eldenring_index.html'));
+})
+
 module.exports = routes;
