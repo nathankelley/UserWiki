@@ -1,17 +1,17 @@
+// const path = require('path');
 const routes = require('express').Router();
-const path = require('path');
+const viewsController = require('../controllers/viewsController.js');
 
-routes.use('/login', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../frontend/login.html'));
-  });
-  routes.use('/register', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../frontend/register.html'));
-  });
+routes.get('/login', viewsController.loginHandler);
 
-  routes.use('/dashboard', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../frontend/dashboard.html'));
-  });
-  
-  routes.use('/', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../frontend/index.html'));
-  });
+// routes.get('/register', (req, res, next) => {
+//   res.sendFile(path.join(__dirname, '../frontend/register.html'));
+// });
+
+// routes.get('/dashboard', (req, res, next) => {
+//   res.sendFile(path.join(__dirname, '../frontend/dashboard.html'));
+// });
+
+// routes.use('/', (req, res, next) => {
+//   res.sendFile(path.join(__dirname, '../frontend/index.html'));
+// });
