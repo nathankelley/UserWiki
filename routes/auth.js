@@ -15,12 +15,9 @@ routes.post('/auth/local', async (req, res) => {
         // Handle the result of the authentication as needed
         if (result === 'success') {
             // If authentication is successful, redirect to the dashboard
-<<<<<<< HEAD
             req.session.user = {
                 username, // Store the user information in the session for future use
               };
-=======
->>>>>>> 2e3e66d4f134c256ad990898d62a52bd4e9abb35
             res.redirect('/');
         } else {
             // If authentication fails, show an error message or redirect to a login failure page
