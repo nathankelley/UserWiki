@@ -100,7 +100,7 @@ module.exports.getAll = (req, res) => {
           res.status(400).send({ message: 'Invalid ID Supplied' });
           return;
         }
-        Boss.deleteOne({ _id: species_id }).then(() => {
+        Species.deleteOne({ _id: species_id }).then(() => {
           res.status(204).send();
         }
         ).catch((err) => {
