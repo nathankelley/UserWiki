@@ -1,20 +1,56 @@
 const routes = require('express').Router();
-const usersController = require('../controllers/usersController.js');
-// const { requiresAuth } = require('express-openid-connect');
+const authController = require('../controllers/authController.js');
+const passport = require('passport');
 
-// GET all users
-routes.get('/users', usersController.getAllUsers);
+routes.post('/auth/local', async (req, res) => {
+    try {
+        const {
+            username,
+            password
+        } = req.body;
 
-// // GET a user
-// routes.get('/users/:username', usersController.getUser);
+        // Call the authLocal function from the authController with the username and password
+        const result = await authController.authLocal(username, password);
 
-// // POST create user
-// routes.post('/users', usersController.addUser);
+        // Handle the result of the authentication as needed
+        if (result === 'success') {
+            // If authentication is successful, redirect to the dashboard
+            req.session.user = {
+                username, // Store the user information in the session for future use
+              };
+            res.redirect('/');
+        } else {
+            // If authentication fails, show an error message or redirect to a login failure page
+            res.status(401).json({
+                message: 'Invalid credentials'
+            });
+        }
+    } catch (err) {
+        // Handle any errors that occurred during authentication
+        console.error('Error during authentication:', err);
+        res.status(500).json({
+            message: 'An error occurred during login'
+        });
+    }
+});
 
-// // PUT update user
-// routes.put('/users/:username', usersController.editUser);
+// Google Authentication route
+routes.get('/auth/google', passport.authenticate('google', {
+    scope: ['profile', 'email']
+}));
+//
+routes.get(
+    '/auth/google/redirect',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    // authController.checkOrCreateUser, // This middleware will be executed after successful Google authentication
+    (req, res) => {
+      // Redirect the user to the dashboard page
+      res.redirect('/');
+    }
+  );
 
-// // DELETE a user
-// routes.delete('/users/:username', usersController.deleteUser);
 
-// module.exports = routes;
+
+
+
+module.exports = routes;

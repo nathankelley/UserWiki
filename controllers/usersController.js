@@ -1,6 +1,7 @@
 const db = require('../models');
 const User = db.users;
 const { emailSchema, passwordSchema } = require('../util/validation_schema');
+const bcrypt = require('bcrypt');
 
 //get all user data
 module.exports.getAllUsers = (req, res, next) => {
@@ -38,9 +39,7 @@ module.exports.getUser = async (req, res, next) => {
 };
 
 module.exports.addUser = async (req, res) => {
-  
   try {
-    console.log('Request body:', req.body);
     const { error: emailError } = emailSchema.validate(req.body.email);
     if (emailError) {
       res.status(400).send({ message: emailError.details[0].message });
@@ -52,7 +51,7 @@ module.exports.addUser = async (req, res) => {
       res.status(400).send({ message: passwordError.details[0].message });
       return;
     }
-    if (!req.body.username || !req.body.password || !req.body.email) {
+    if (!req.body.username || !req.body.password || !req.body.email || !req.body.firstName) {
       res.status(400).send({ message: 'username, password, and email cannot be empty!' });
       return;
     }
@@ -71,19 +70,23 @@ module.exports.addUser = async (req, res) => {
       res.status(400).send({ message: 'username or email already exists' });
       return;
     }
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
     const newUser = new User({
       username: req.body.username,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      password: req.body.password,
+      password: hashedPassword,
       birthDate: req.body.birthDate,
       profileImg: req.body.profileImg || ""
     });
 
     const savedUser = await newUser.save();
-    res.status(201).send(savedUser).send({message: 'user successfully added'});
+    
+    // Redirect to the dashboard page
+    res.redirect('/login?success=true');
   } catch (err) {
     res.status(500).json(err);
   }

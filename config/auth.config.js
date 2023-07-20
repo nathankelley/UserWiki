@@ -1,137 +1,42 @@
 // const dotenv = require('dotenv');
 // dotenv.config();
-// const passport = require('passport');
 // const GoogleStrategy = require('passport-google-oauth20').Strategy;
+// const User = require('../models/users');
 
-// module.exports(
-//   new GoogleStrategy(
-//     {
-//       clientID: process.env.CLIENT_ID,
-//       clientSecret: process.env.SECRET,
-//       callbackURL: 'http://localhost:3000',
-//     },
-//     (accessToken, refreshToken, profile, done) => {
-//       // Implement your logic to handle the authenticated user profile
-//       // This callback will be triggered after successful Google OAuth authentication
-//     }
-//   )
-// );
+// module.exports = new GoogleStrategy({
+//   clientID: '278837145189-lp3a2s8bfldi3k770kof7mcq89n1lt9c.apps.googleusercontent.com',
+//   clientSecret: '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',
+//   callbackURL: 'http://localhost:3000/auth/google/redirect',
+//   passReqToCallback: true
+// }, (req, accessToken, refreshToken, profile, done) => {
+//     console.log('Google User Profile:', profile); // Log the entire profile object
+//     new User({
+//       username: profile.displayName,
+//       email: profile.email
+//     })
 
-// module.exports = {
-//   config: {
-//     clientID: process.env.CLIENT_ID,
-//     clientSecret: process.env.SECRET,
-//     callbackURL: 'https://userwiki.onrender.com/auth/google/callback'
-//   },
-//   session: {
-//     secret: process.env.SECRET,
-//     resave: false,
-//     saveUninitialized: true
-//   }
-// };
-
-// passport.use(new GoogleStrategy({
-//     clientID: process.env.CLIENT_ID,
-//     clientSecret: process.env.SECRET,
-//     callbackURL: 'http://localhost:3000/auth/google/callback',
-//     passReqToCallback: true
-//   },
-//   // function(accessToken, refreshToken, profile, cb) {
-//   //   User.findOrCreate({ googleId: profile.id }, function (err, user) {
-//   //     return cb(err, user);
-//   //   });
-//   // }
-//   function(request, accessToken, refreshToken, profile, done){
-//     return done(err, profile);
-//   }
-// ));
-
-// passport.serializeUser(function(user, done){
-//   done(null, user);
-
-// });
-
-// passport.deserializeUser(function(user, done){
-//   done(null, user);
-
+//   // Store the user information in the session
+//   req.session.user = {
+//     email, firstName, lastName
+//     // You can add other user properties here if needed
+//   };
+//   return done(null, profile); // Call the done callback to indicate successful authentication
 // });
 
 const dotenv = require('dotenv');
 dotenv.config();
-
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const db = require('../models');
+const User = db.users;
 
-// Local authentication strategy
-const User = require('../models/users');
-
-passport.use(
-  new LocalStrategy((username, password, done) => {
-    // Find a user with the provided username in your database
-    User.findOne({ username: username }, (err, user) => {
-      if (err) {
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username or password.' });
-      }
-      // Check if the provided password matches the stored hashed password
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect username or password.' });
-      }
-      // Authentication successful, return the user object
-      return done(null, user);
-    });
-  })
-);
-
-
-// Google authentication strategy
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: 'your-client-id',
-      clientSecret: 'your-client-secret',
-      callbackURL: '/auth/google/callback',
-    },
-    (accessToken, refreshToken, profile, done) => {
-      // Replace this with your actual user authentication logic using Google OAuth
-      // You can use the `profile` information to create or authenticate the user
-      User.findOne({ googleId: profile.id }, (err, user) => {
-        if (err) {
-          return done(err);
-        }
-        if (!user) {
-          // Create a new user in your database based on the Google profile information
-          const newUser = new User({
-            googleId: profile.id,
-            username: profile.displayName,
-          });
-          newUser.save((err) => {
-            if (err) {
-              return done(err);
-            }
-            return done(null, newUser);
-          });
-        } else {
-          return done(null, user);
-        }
-      });
-    }
-  )
-);
-
-passport.serializeUser((user, done) => {
-  done(null, user.id);
+module.exports = new GoogleStrategy({
+  clientID: '278837145189-lp3a2s8bfldi3k770kof7mcq89n1lt9c.apps.googleusercontent.com',
+  clientSecret: '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',
+  callbackURL: 'http://localhost:3000/auth/google/redirect',
+  passReqToCallback: true
+}, (req, accessToken, refreshToken, profile, done) => {
+  // Implement your logic to handle the authenticated user profile
+  // This callback will be triggered after successful Google OAuth authentication
+  req.session.user = profile; // Store the user profile in the session
+  return done(null, profile); // Call the done callback to indicate successful authentication
 });
-
-passport.deserializeUser((id, done) => {
-  // Replace this with your actual user retrieval logic from the database
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
-});
-
-module.exports = passport;
-

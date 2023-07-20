@@ -1,17 +1,13 @@
 const routes = require('express').Router();
-const path = require('path');
+const viewsController = require('../controllers/viewsController.js');
 
-routes.use('/login', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../frontend/login.html'));
-  });
-  routes.use('/register', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../frontend/register.html'));
-  });
+routes.get('/login', viewsController.loginHandler);
+routes.get('/register', viewsController.regHandler);
+routes.get('/dashboard', viewsController.dashboardHandler);
 
-  routes.use('/dashboard', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../frontend/dashboard.html'));
-  });
-  
-  routes.use('/', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../frontend/index.html'));
-  });
+routes.get('/pokemon_index', viewsController.pokemonPageHandler);
+
+routes.get('/halo_index', viewsController.haloPageHandler);
+routes.get('/eldenring_index', viewsController.eldenringPageHandler);
+
+module.exports = routes;
