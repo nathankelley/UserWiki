@@ -15,6 +15,12 @@ routes.post('/auth/local', async (req, res) => {
         // Handle the result of the authentication as needed
         if (result === 'success') {
             // If authentication is successful, redirect to the dashboard
+<<<<<<< HEAD
+            req.session.user = {
+                username, // Store the user information in the session for future use
+              };
+=======
+>>>>>>> 2e3e66d4f134c256ad990898d62a52bd4e9abb35
             res.redirect('/');
         } else {
             // If authentication fails, show an error message or redirect to a login failure page
@@ -39,7 +45,7 @@ routes.get('/auth/google', passport.authenticate('google', {
 routes.get(
     '/auth/google/redirect',
     passport.authenticate('google', { failureRedirect: '/login' }),
-    authController.checkOrCreateUser, // This middleware will be executed after successful Google authentication
+    // authController.checkOrCreateUser, // This middleware will be executed after successful Google authentication
     (req, res) => {
       // Redirect the user to the dashboard page
       res.redirect('/');
