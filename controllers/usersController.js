@@ -86,7 +86,7 @@ module.exports.addUser = async (req, res) => {
     const savedUser = await newUser.save();
     
     // Redirect to the dashboard page
-    // res.redirect('/login?success=true');
+    res.redirect('/login?success=true');
   } catch (err) {
     res.status(500).json(err);
   }
