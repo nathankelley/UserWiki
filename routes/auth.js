@@ -15,7 +15,7 @@ routes.post('/auth/local', async (req, res) => {
         // Handle the result of the authentication as needed
         if (result === 'success') {
             // If authentication is successful, redirect to the dashboard
-            res.redirect('/home');
+            res.redirect('/');
         } else {
             // If authentication fails, show an error message or redirect to a login failure page
             res.status(401).json({
@@ -42,7 +42,7 @@ routes.get(
     authController.checkOrCreateUser, // This middleware will be executed after successful Google authentication
     (req, res) => {
       // Redirect the user to the dashboard page
-      res.redirect('/dashboard');
+      res.redirect('/');
     }
   );
 
